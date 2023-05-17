@@ -1,0 +1,44 @@
+# semi-supervised action transition max transition fn 75, dct smooth + last frame smooth, with extra future
+dataset: babel
+exp_name: st_debug_emb6
+nz: 512
+t_his: 10
+t_pred: 60
+lambda_v: 1000
+beta: 0.01
+vae_specs:
+# rnn model
+  model_name: v3_5_4
+  rnn_type: gru
+  x_birnn: false
+  use_drnn_mlp: true
+  is_layernorm: false
+  nh_mlp: [512, 256]
+  nh_rnn: 512
+
+# dataset
+  # n_action: 13
+  # actions: ['body_down', 'body_up', 'jump_forward', 'jump_jacks', 'jump_rope', 'put_pick_down', 'put_pick_up', 'step_back', 'step_forward', 'step_right', 'turn_back', 'turn_left', 'turn_right']
+  n_action: 11
+  actions: ['stand_up', 'sit_down', 'jump_forward', 'jump_jacks', 'jump_rope', 'pick_up', 'put_down', 'walk', 'walk_backwards', 'kick_right', 'kick_left']
+  n_action_classes: 5
+  action_classes: {"body":['stand_up', 'sit_down'],"jump":['jump_forward', 'jump_jacks', 'jump_rope'],"pick":['pick_up', 'put_down'],"walk":[walk,'walk_backwards'],"kick":['kick_right', 'kick_left']}
+  # actions: ['walk']
+  others_all_act: False
+  max_len: 100
+  min_len: 30
+  t_pre_extra: 50
+  data_file: './data/new_action_kick_{}.npz'
+  is_other_act: true
+
+# training
+  lambdas: {"weight_MSE":10,"weight_KLD":{"w_start":0,"w_end":2,"step":3000}}
+  act_trans_k: 0.08
+  max_trans_fn: 25
+  smooth_N: 10
+  dct_n: 5
+vae_lr: 1.e-3
+batch_size: 256
+num_vae_epoch: 10000
+num_vae_epoch_fix: 200
+num_vae_data_sample: 10000
