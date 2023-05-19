@@ -9,7 +9,7 @@ Code for "Fine-grained Human Body Motion Generation Based On Conditional Variati
 * numba
 tested on pytorch == 1.10.1
 
-Human body model and data[link](https://drive.google.com/drive/folders/1CD5WdsOHBk5btt7Ilr-J31keNgLKIDG7)
+Human body model and data [link](https://drive.google.com/drive/folders/1CD5WdsOHBk5btt7Ilr-J31keNgLKIDG7)
 
 ### Training and Evaluation
 * We provide YAML configs inside ``motion_pred/cfg``: `[dataset]_rnn.yml` and `[dataset]_act_classifier.yml` for the main model and the classifier (for evaluation) respectively. These configs correspond to pretrained models inside ``results``.
